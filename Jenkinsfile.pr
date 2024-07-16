@@ -22,14 +22,6 @@ pipeline {
                         sh '''
                             helm dependency update
                             helm lint . --strict
-                        '''
-                    }
-                }
-
-                stage('helm template') {
-                    steps {
-                        sh '''
-                            helm dependency update
                             helm template .
                         '''
                     }

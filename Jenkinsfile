@@ -2,26 +2,15 @@ pipeline {
     agent any
     stages {
         stage('helm chart validations') {
-            parallel {
-                stage('helm lint') {
-                    steps {
-                        sh '''
-                            helm dependency update
-                            helm lint . --strict
-                        '''
-                    }
-                }
-
-                stage('helm template') {
-                    steps {
-                        sh '''
-                            helm dependency update
-                            helm template .
-                        '''
-                    }
-                }
+            steps {
+                sh '''
+                    helm dependency update
+                    helm lint . --strict
+                    helm template .
+                '''
             }
         }
+
         stage('Release') {
             tools {
                 nodejs "nodejs"
