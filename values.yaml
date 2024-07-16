@@ -1,0 +1,64 @@
+# affinity -- Affinity for pod assignment
+affinity: {}
+
+# additionalLabels -- Labels to add to each object of the chart.
+additionalLabels: {}
+
+autoDiscovery:
+  clusterName: # cluster.local
+  namespace: # default
+  tags:
+    - k8s.io/cluster-autoscaler/enabled
+    - k8s.io/cluster-autoscaler/{{ .Values.autoDiscovery.clusterName }}
+    - kubernetes.io/cluster/{{ .Values.autoDiscovery.clusterName }}
+  labels: []
+
+autoscalingGroups: []
+
+awsAccessKeyID: ''
+awsRegion: us-east-1
+awsSecretAccessKey: ''
+cloudProvider: aws
+
+extraArgs:
+  logtostderr: true
+  stderrthreshold: info
+  v: 4
+
+extraVolumeMounts:
+  - name: ssl-certs
+    mountPath: /etc/ssl/certs/ca-certificates.crt
+    readOnly: true
+
+extraVolumes:
+  - name: ssl-certs
+    hostPath:
+      path: /etc/ssl/certs/ca-bundle.crt
+
+image:
+  repository: registry.k8s.io/autoscaling/cluster-autoscaler
+  tag: v1.30.0
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+replicaCount: 1
+
+# resources -- Pod resource requests and limits.
+resources:
+  {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 300Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 300Mi
+
+# topologySpreadConstraints -- You can use topology spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, and other user-defined topology domains. (requires Kubernetes >= 1.19).
+topologySpreadConstraints:
+  []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: DoNotSchedule
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/instance: cluster-autoscaler
