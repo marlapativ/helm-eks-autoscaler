@@ -12,7 +12,7 @@
         [
             "@semantic-release/exec",
             {
-                "prepareCmd": "helm package ."
+                "prepareCmd": "helm dependency update && helm package ."
             }
         ],
         [
