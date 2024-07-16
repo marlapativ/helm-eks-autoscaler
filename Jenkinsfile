@@ -6,6 +6,7 @@ pipeline {
                 stage('helm lint') {
                     steps {
                         sh '''
+                            helm dependency update
                             helm lint . --strict
                         '''
                     }
@@ -14,6 +15,7 @@ pipeline {
                 stage('helm template') {
                     steps {
                         sh '''
+                            helm dependency update
                             helm template .
                         '''
                     }

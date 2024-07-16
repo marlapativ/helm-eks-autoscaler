@@ -14,9 +14,7 @@ autoDiscovery:
 
 autoscalingGroups: []
 
-awsAccessKeyID: ''
 awsRegion: us-east-1
-awsSecretAccessKey: ''
 cloudProvider: aws
 
 extraArgs:
@@ -41,6 +39,12 @@ image:
   pullSecrets: []
 
 replicaCount: 1
+
+rbac:
+  serviceAccount:
+    create: true
+    annotations: {}
+    name: "cluster-autoscaler"
 
 # resources -- Pod resource requests and limits.
 resources:
