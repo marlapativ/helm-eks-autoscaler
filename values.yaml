@@ -5,12 +5,11 @@ affinity: {}
 additionalLabels: {}
 
 autoDiscovery:
-  clusterName: # cluster.local
-  namespace: # default
+  clusterName: 'dev-eks-cluster-vpc'
+  namespace: 'cluster-autoscaler'
   tags:
     - k8s.io/cluster-autoscaler/enabled
     - k8s.io/cluster-autoscaler/{{ .Values.autoDiscovery.clusterName }}
-    - kubernetes.io/cluster/{{ .Values.autoDiscovery.clusterName }}
   labels: []
 
 autoscalingGroups: []
