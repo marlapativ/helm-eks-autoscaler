@@ -2,7 +2,7 @@ pipeline {
     environment {
         imageRegistry = "docker.io"
         imageRepo = "marlapativ"
-        dockerimageName = "eks-autoscaler"
+        dockerimageName = "cluster-autoscaler"
         dockerimageTag = "v1.30.0"
         registryCredential = 'dockerhub'
     }
